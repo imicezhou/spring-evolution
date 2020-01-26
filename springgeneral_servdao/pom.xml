@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.neo</groupId>
+    <artifactId>springgeneral</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>springgeneral_servdao</artifactId>
+  <packaging>jar</packaging>
+  
+  <dependencies>
+  
+    <!-- 
+                  作为一个纯后台，引入所有spring-mvc所有jar包其实是多余的，但目前先这样。
+        As a pure back-end, it is redundant to import all mvc jars.
+        But it is convenient to resolve deppendence problem at this stage.
+     -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>${spring.version}</version>
+	</dependency>
+	
+  	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>3.1.0</version>
+	    <scope>provided</scope>
+	</dependency>
+	
+	<!-- Let spring transaction work -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-tx</artifactId>
+	    <version>${spring.version}</version>
+	</dependency>
+	
+	<!--  -->
+	<dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-jdbc</artifactId>
+    	<version>${spring.version}</version>
+    </dependency>
+    
+    <!-- mybatis-plus -->
+    <!-- mybatis-plus will automatically import relative jars(e.g mybatis, mybatis-spring) -->
+	<dependency>
+	    <groupId>com.baomidou</groupId>
+	    <artifactId>mybatis-plus</artifactId>
+	    <version>3.1.2</version>
+	</dependency>
+	
+	<!--
+	   DataSource Pool 
+	        数据库连接池 
+	-->
+	<dependency>
+	    <groupId>com.mchange</groupId>
+	    <artifactId>c3p0</artifactId>
+	    <version>0.9.5.2</version>
+	</dependency>
+
+	
+	<!-- 
+	    mysql 驱动包
+	    mysql driver
+	 -->
+	<dependency>
+    	<groupId>mysql</groupId>
+    	<artifactId>mysql-connector-java</artifactId>
+    	<version>5.1.41</version>
+	</dependency>
+	
+	<!-- 
+	    rpc工程中存放了控制层与服务层进行通信时所用到的公共接口和bean
+	    Project rpc consists of common interfaces and beans between controller and service
+	-->
+    <dependency>
+    	<groupId>com.neo.rpc</groupId>
+  		<artifactId>springgeneral_rpc</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+  
+  
+  <build>
+  
+    <finalName>springgeneral_servdao</finalName>
+  
+  	<plugins>
+      <plugin>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-maven-plugin</artifactId>
+	    <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+	  </plugin>
+  	</plugins>
+  </build>
+</project>
