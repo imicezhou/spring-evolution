@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.neo.dubbo.bo.frame.AccountInfo;
 import com.neo.dubbo.facade.frame.AccountServiceFacade;
@@ -25,12 +27,14 @@ public class LoginController {
 	@Autowired
 	private AccountServiceFacade accountServiceFacade;
 	
-	@GetMapping("/signin")
+	/*
+	 * 登录
+	 */
+	@PostMapping("/signin")
 	public ModelAndView signin(
 			@CookieValue(name="JSESSIONID") String sessionID,
-			@RequestParam String account,
-			@RequestParam String password,
-			@RequestParam String ifremember,
+			@RequestParam(name = "username") String username,
+			@RequestParam(name = "password") String password,
 			HttpSession session,
 			HttpServletRequest request
 		) 
@@ -39,25 +43,35 @@ public class LoginController {
 		ModelAndView mv = new ModelAndView();
 		
 		AccountInfo ainfo = new AccountInfo();
-		ainfo.setAccount(account);
+		ainfo.setAccount(username);
 		ainfo.setPassword(password);
 		
-		if (accountServiceFacade.accountIfMatch(ainfo)) {
-			mv.setViewName("index");
+		if("neo".equals(username)) {
+			mv.setViewName("redirect:index");
 			session.setMaxInactiveInterval(600);
-			session.setAttribute(sessionID, sessionID);   //记住此sessionID
+			session.setAttribute(sessionID, sessionID); 
 		}
 		else {
-			mv.setViewName("login");
-			request.setAttribute("signin_errorMessage", "账号/密码不正确");
-			mv.addObject("signin_errorMessage", "账号/密码不正确");
+			mv.setViewName("redirect:login");
+			session.setAttribute("signin_errorMessage", "账号/密码不正确");
 		}
+//		if (accountServiceFacade.accountIfMatch(ainfo)) {
+//			mv.setViewName("index");
+//			session.setMaxInactiveInterval(600);
+//			session.setAttribute(sessionID, sessionID);   //记住此sessionID
+//		}
+//		else {
+//			mv.setViewName("redirect:login");
+//			session.setAttribute("signin_errorMessage", "账号/密码不正确");
+//		}
 		return mv;
 	}
 	
-	
+	/*
+	 * 退出
+	 */
 	@GetMapping("/exit")
-	public ModelAndView exit
+	public String exit
 		(
 			@CookieValue(name="JSESSIONID") String sessionID,
 			HttpSession session
@@ -65,7 +79,14 @@ public class LoginController {
 	{
 		ModelAndView mv = new ModelAndView();
 		session.removeAttribute(sessionID);      //将用户从session中删去
-		mv.setViewName("login");    //回到登录页面
-		return mv;
+		return "redirect:login";
+	}
+	
+	/*
+	 * 登录成功后，跳转到index
+	 */
+	@GetMapping("/index")
+	public String index() {
+		return "index";
 	}
 }
