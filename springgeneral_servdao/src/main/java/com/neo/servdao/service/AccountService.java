@@ -1,8 +1,8 @@
 package com.neo.servdao.service;
 
-import com.neo.servdao.po.Frame_Account;
+import com.neo.servdao.po.FrameAccount;
 
 public interface AccountService {
-	public boolean accountIfExist(Frame_Account account);
-	public boolean accountIfMatch(Frame_Account account);
+	public boolean accountIfExist(FrameAccount account);
+	public boolean accountIfMatch(FrameAccount account);
 }

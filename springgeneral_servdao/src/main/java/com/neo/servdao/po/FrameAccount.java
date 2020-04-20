@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
  */
 
 @TableName("frame_account")
-public class Frame_Account {
+public class FrameAccount {
 
 	@TableId(type=IdType.AUTO)
 	private Integer accountId;

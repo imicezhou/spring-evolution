@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.neo.dubbo.bo.frame.AccountInfo;
 import com.neo.dubbo.facade.frame.AccountServiceFacade;
-import com.neo.servdao.po.Frame_Account;
+import com.neo.servdao.po.FrameAccount;
 import com.neo.servdao.service.AccountService;
 
 
@@ -15,7 +15,7 @@ public class AccountServiceFacadeImpl implements AccountServiceFacade {
 	
 	@Override
 	public boolean accountIfExist(AccountInfo account) {
-		Frame_Account fa = new Frame_Account();
+		FrameAccount fa = new FrameAccount();
 		fa.setAccountId(account.getAccountId());
 		fa.setAccount(account.getAccount());
 		fa.setPassword(account.getPassword());
@@ -24,7 +24,7 @@ public class AccountServiceFacadeImpl implements AccountServiceFacade {
 
 	@Override
 	public boolean accountIfMatch(AccountInfo account) {
-		Frame_Account fa = new Frame_Account();
+		FrameAccount fa = new FrameAccount();
 		fa.setAccountId(account.getAccountId());
 		fa.setAccount(account.getAccount());
 		fa.setPassword(account.getPassword());

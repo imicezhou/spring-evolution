@@ -43,7 +43,7 @@
     </dependency>
     
     <!-- mybatis-plus -->
-    <!-- mybatis-plus will automatically import relative jars(e.g mybatis, mybatis-spring) -->
+    <!-- mybatis-plus will automatically import relative jars(e.g mybatis, mybatis-spring...) -->
 	<dependency>
 	    <groupId>com.baomidou</groupId>
 	    <artifactId>mybatis-plus</artifactId>
@@ -80,6 +80,16 @@
   		<artifactId>springgeneral_rpc</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
     </dependency>
+    
+    <!-- 代码自动生成 -->
+	<dependency>
+	    <groupId>com.baomidou</groupId>
+	    <artifactId>mybatis-plus-generator</artifactId>
+	    <version>3.1.2</version>
+	    <scope>test</scope>
+	</dependency>
+    
+    
   </dependencies>
   
   

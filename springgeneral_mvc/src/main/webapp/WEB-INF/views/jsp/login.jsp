@@ -35,7 +35,7 @@
 			<form class="layui-form zyl_pad_01" action="./signin" method="post">
 				<div class="layui-col-sm12 layui-col-md12">
 					<div class="layui-form-item">
-						<input type="text" name="username" lay-verify="required|userName" autocomplete="off" placeholder="账号" class="layui-input">
+						<input type="text" name="username" lay-verify="required|userName" autocomplete="off" placeholder="账号" class="layui-input" value="neo">
 						<i class="layui-icon layui-icon-username zyl_lofo_icon"></i>
 					</div>
 				</div>
@@ -88,7 +88,7 @@
 	  var layer = layui.layer
 	  ,form = layui.form;
 	  
-	  layer.msg('Hello World');
+	  //layer.msg('Hello World');
 	  
 	  
 	});

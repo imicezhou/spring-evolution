@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.neo.dubbo.bo.frame.AccountInfo;
 import com.neo.servdao.mapper.AccountDao;
-import com.neo.servdao.po.Frame_Account;
+import com.neo.servdao.po.FrameAccount;
 import com.neo.servdao.service.AccountService;
 
 @Service
@@ -19,10 +19,10 @@ public class AccountServiceImpl implements AccountService {
 	private AccountDao accountDao;
 	
 	@Override
-	public boolean accountIfExist(Frame_Account account) {
+	public boolean accountIfExist(FrameAccount account) {
 		Map<String,Object> args = new HashMap<String,Object>();
 		args.put("account", account.getAccount());
-		List<Frame_Account> rs = accountDao.selectByMap(args);
+		List<FrameAccount> rs = accountDao.selectByMap(args);
 		if(rs != null || rs.size() > 0) {
 			return true;
 		}
@@ -31,12 +31,12 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public boolean accountIfMatch(Frame_Account account) {
+	public boolean accountIfMatch(FrameAccount account) {
 		
 		Map<String,Object> args = new HashMap<>();
 		args.put("account", account.getAccount());
 		args.put("password", account.getPassword());
-		List<Frame_Account> rs = accountDao.selectByMap(args);
+		List<FrameAccount> rs = accountDao.selectByMap(args);
 		if(rs!=null || rs.size()>0) {
 			return true;
 		}
