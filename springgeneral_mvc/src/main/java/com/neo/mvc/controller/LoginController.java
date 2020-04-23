@@ -46,9 +46,10 @@ public class LoginController {
 		ainfo.setPassword(password);
 		
 		if("neo".equals(username)) {
-			mv.setViewName("redirect:/index");
+			mv.setViewName("redirect:/index2");
 			session.setMaxInactiveInterval(600);
-			session.setAttribute(sessionID, sessionID); 
+			session.setAttribute(sessionID, sessionID);
+			session.setAttribute("accountId", 1);
 		}
 		else {
 			mv.setViewName("redirect:/login");
@@ -93,8 +94,17 @@ public class LoginController {
 	/*
 	 * 1 返回的视图名称正常的，都通过thymeleaf来解析
 	 */
-	@GetMapping("/template")
-	public String template() {
-		return "template";
+	@GetMapping("/index2")
+	public ModelAndView template(
+			HttpSession session
+			) {
+		
+		//根据accountId找到对应的用户信息，菜单信息
+		ModelAndView mv = new ModelAndView("index2");
+		mv.addObject("username", "neo");
+		mv.addObject("welcome", "欢迎,");
+		
+		
+		return mv;
 	}
 }

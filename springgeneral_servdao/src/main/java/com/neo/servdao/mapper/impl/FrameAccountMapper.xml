@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neo.servdao.mapper.AccountDao">
+
+    <resultMap id="accountMap" type="com.neo.servdao.po.FrameAccount">
+        <id column="account_id" property="accountId"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+    
+    <select id="selectRoleByAccount" parameterType="java.lang.String" resultType="java.util.Map">
+    select fa.account_id,fu.user_id,fu.username,fr.role_id,fr.rolename from frame_account fa,frame_user fu,frame_role fr
+	where fa.account_id = fu.account_id 
+	and fu.role_id = fr.role_id
+	and fa.account = #{account}
+    </select>
+    
+    
+	<select id="selectMenuByRoleId">
+	
+	</select>
+	
+</mapper>

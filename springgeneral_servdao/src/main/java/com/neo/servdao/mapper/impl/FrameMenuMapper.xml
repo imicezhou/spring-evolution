@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neo.servdao.mapper.MenuDao">
+
+    <resultMap id="MenuMap" type="com.neo.servdao.po.FrameMenu">
+        <id column="menu_id" property="menuId"/>
+        <result column="menucode" property="menuCode"/>
+        <result column="menuname" property="menuName"/>
+        <result column="menuurl" property="menuUrl"/>
+        <result column="menutype" property="menuType"/>
+        <result column="menuparent" property="menuParent"/>
+        <result column="menuorder" property="menuOrder"/>
+        <result column="iflock" property="ifLock"/>
+    </resultMap>
+
+    
+    <select id="selectMenuByParent" resultMap="MenuMap">
+    	select * from frame_menu
+    	<where>
+    		<if test="parent == null">
+    			menuparent = null
+    		</if>
+    		<if test="parent != null">
+    			menuparent = #{menuparent}
+    		</if>
+    	</where>    
+   	</select>
+    
+    <select id="selectMenuByUserIdAndParent" resultMap="MenuMap">
+    	select fm.*
+    	from frame_menu fm,frame_rel_rolemenu frr,frame_user fu
+		where fm.menu_id = frr.menu_id
+		and fu.role_id = frr.role_id
+		and fu.user_id= #{arg0}
+		and fm.menuparent = #{arg1}
+		order by fm.menuorder 
+    </select>
+    
+</mapper>
